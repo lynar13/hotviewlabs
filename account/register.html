@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Register Page</title>
-    <meta name="description" content="This is the account register page.">
+    <title>Register Page</title>
+    <meta name="description" content="This is the account login page.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,42 +12,84 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    
 </head>
 <body>
-
-   <header>
-    <a href="/index.html" class="logo">
-        <img src="/assets/hotview_logo.png" alt="hotview-logo">
-    </a>
     <nav>
+        <div class="logo">
+            <a href="index.html">
+                <img src="assets/hotview_logo.png" alt="hotview-logo">
+            </a>
+        </div>
         <ul>
             <li><a href="search.html">
                 <span class="material-symbols-outlined">
                     search
                 </span></a>
             </li>
-            <li><a href="/index.html">Blog</a></li>
+            <li><a href="/post/create.html">Blog</a></li>
+            <li><a href="/account/register.html" class="register-button">Register</a></li>
             <li><a href="/account/login.html" class="login-button">Login</a></li>
+               
         </ul>
     </nav>
-   </header>
-   <main>
+    <header>
+        <h1>Account Register</h1>
+    </header>
 
-    <form id="registration-form">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-        <button type="submit">Register</button>
-      </form>
-      <div id="message"></div>
-
-   </main>
-
-   <script src="/script.js"></script>
+    <main>
+        <form id="register-form">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+          
+    </main>
+    <footer>
    
+        <div class="footer-list nav-links">
+           <li><a href="index.html" class="logo footer-logo">
+                <img src="/assets/hotview_logo.png" alt="hotview-logo">
+            </a></li> 
+            <ul class="nav-links">
+                <li><a href="/about.html">About Us</a></li>
+                <li><a href="/contact.html">Contact Us</a></li>
+                <li><a href="search.html">Search</li>
+            </ul>  
+            <ul class="nav-links">
+                <li><a href="/index.html">Blog</a></li>
+                <li><a href="/account/login.html">Login</a><li>
+            </ul>
+            <ul class="social-icons">
+                <li><button><a href="/index.html"></a>BLOG</button></li>
+                <p>FOLLOW US</p>
+                <div class="soc-med">
+                    <img src="/assets/facebook-svgrepo-com .svg" alt="facebook">
+                    <img src="/assets/instagram-svgrepo-com.svg" alt="intagram">
+                </div>
+            </ul>            
+        </div>
+    
+        <div class="copy">
+            &copy; 2024 HotView Labs
+        </div>
+
+    </footer>
+    
+    <script src="../js/auth.js"></script>
+
+
 </body>
 </html>
