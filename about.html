@@ -16,31 +16,89 @@
 </head>
 <body>
 
-   <header>
-    <a href="index.html" class="logo">
-        <img src="assets/hotview_logo.png" alt="hotview-logo">
-    </a>
     <nav>
+        <div class="logo">
+            <a href="/index.html">
+                <img src="/assets/hotview_logo.png" alt="hotview-logo">
+            </a>
+        </div>
         <ul>
-            <li><a href="search.html">
-                <span class="material-symbols-outlined">
-                    search
-                </span></a>
+            <li>
+                <span class="material-symbols-outlined" id="search-icon">search</span>
+                <input type="text" id="search-input" placeholder="Search posts by category..." style="display: none;" oninput="handleSearch(event)">
             </li>
-            <li><a href="index.html">Blog</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="#" class="login-button">LOGIN</a></li>
+            <li><a href="/index.html">Blog</a></li>
+            <li><a href="/account/login.html">Login</a></li>
+               
         </ul>
     </nav>
-   </header>
-   <main class="main-wrapper">
-       <div>
+
+    <div id="loader" class="loader"></div>
+
+    <header>
         <h1 class="heading">About Us</h1>
-        <p class="about-us">
-            HotView Labs is a dynamic Tech Research and Development company with a global presence. Comprising 30 dedicated employees, HotView Labs is committed to its mission of delivering **precise and timely insights** to tech leaders worldwide. Whether it's cutting-edge innovations, market trends, or strategic intelligence, HotView Labs ensures that tech decision-makers stay ahead of the curve.
-        </p>
-       </div>
-   </main>
+    </header>
+
+    <main>
+    <section class="about-intro">
+        <h2>Who We Are</h2>
+        <p>HotView Labs is a dynamic Tech Research and Development company with a global presence, renowned for its unwavering commitment to excellence in the tech industry. Our team comprises 30 dedicated employees who bring a wealth of expertise and passion to our mission of delivering precise and timely insights to tech leaders worldwide.</p>
+    </section>
+
+    <section class="our-mission">
+        <h2>Our Mission</h2>
+        <p>At HotView Labs, our mission is to empower tech decision-makers with the knowledge and foresight needed to stay ahead of the curve. Whether it's cutting-edge innovations, market trends, or strategic intelligence, we provide the critical insights that drive successful strategies and informed decisions in an ever-evolving technological landscape.</p>
+    </section>
+
+    <section class="what-we-offer">
+        <h2>What We Offer</h2>
+        <div class="offerings">
+            <div class="offering">
+                <h3>Cutting-Edge Innovations</h3>
+                <p>We are at the forefront of technological advancements, constantly exploring new frontiers and pushing the boundaries of what is possible. Our R&D efforts focus on creating innovative solutions that address the most pressing challenges in the tech industry.</p>
+            </div>
+            <div class="offering">
+                <h3>Market Trends</h3>
+                <p>Understanding market dynamics is crucial for staying competitive. Our comprehensive analysis of market trends provides tech leaders with a clear view of emerging opportunities and potential disruptions, enabling them to navigate the complexities of the global tech market effectively.</p>
+            </div>
+            <div class="offering">
+                <h3>Strategic Intelligence</h3>
+                <p>Strategic intelligence is the backbone of successful decision-making. We offer deep insights and strategic guidance that help tech companies formulate robust strategies, optimize their operations, and achieve sustainable growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="global-reach">
+        <h2>Our Global Reach</h2>
+        <p>With a global footprint, HotView Labs operates across multiple regions, bringing our expertise and insights to tech hubs around the world. Our international presence allows us to gather diverse perspectives and understand regional nuances, enhancing the relevance and impact of our research.</p>
+    </section>
+
+    <section class="our-team">
+        <h2>Our Team</h2>
+        <p>Our greatest asset is our team of 30 dedicated professionals who are passionate about technology and innovation. Each team member brings unique skills and experiences, contributing to a collaborative environment where ideas flourish and excellence is achieved.</p>
+    </section>
+
+    <section class="commitment-to-excellence">
+        <h2>Commitment to Excellence</h2>
+        <p>Excellence is at the core of everything we do at HotView Labs. We are committed to maintaining the highest standards in our research, ensuring that our clients receive accurate, reliable, and actionable insights. Our rigorous methodologies and thorough analyses set us apart as a trusted partner in the tech industry.</p>
+    </section>
+
+    <section class="why-choose-us">
+        <h2>Why Choose HotView Labs</h2>
+        <ul>
+            <li><strong>Expertise:</strong> Our team consists of seasoned professionals with extensive experience in tech research and development.</li>
+            <li><strong>Innovation:</strong> We are dedicated to exploring new technologies and delivering innovative solutions that drive progress.</li>
+            <li><strong>Reliability:</strong> Our insights are backed by rigorous research and analysis, providing a solid foundation for strategic decisions.</li>
+            <li><strong>Global Perspective:</strong> Our international presence ensures that we understand global trends and regional specifics, offering a comprehensive view of the tech landscape.</li>
+        </ul>
+    </section>
+
+    <section class="join-us">
+        <h2>Join Us</h2>
+        <p>Stay ahead of the curve with HotView Labs. Whether you are looking to innovate, understand market dynamics, or gain strategic intelligence, we are here to help you succeed in the fast-paced world of technology. Join the growing number of tech leaders who trust HotView Labs for their most critical insights and strategic guidance.</p>
+    </section>
+</main>
+
    
 <footer>
    
@@ -51,7 +109,7 @@
         <ul class="nav-links">
             <li><a href="/about.html">About Us</a></li>
             <li><a href="/contact.html">Contact Us</a></li>
-            <li><a href="search.html">Search</li>
+            <li><a href="/terms.html">Terms and Conditions</li>
         </ul>  
         <ul class="nav-links">
             <li><a href="/index.html">Blog</a></li>

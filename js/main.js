@@ -1,23 +1,42 @@
-document.addEventListener('DOMContentLoaded', async () => {
-  await fetchPosts();
-  setupCarousel();
-});
-
 let allPosts = [];
 let filteredPosts = [];
 let currentPage = 1;
-const postsPerPage = 6;
+const postsPerPage = 12;
+const userName = 'jolyn';  // Replace with the appropriate user name
 
-async function fetchPosts() {
+document.addEventListener('DOMContentLoaded', async () => {
+  showLoader();
+  await fetchPosts();
+  hideLoader();
+
+  const logoutButton = document.getElementById('logout-button');
+  if (logoutButton) {
+      logoutButton.addEventListener('click', logout);
+  }
+
+  setupCarousel();
+  setupSearch();
+});
+
+async function fetchPosts(tag = '') {
+  let url = `https://v2.api.noroff.dev/blog/posts/${userName}`;
+  if (tag) {
+    url += `?_tag=${tag}`;
+  }
+  
   try {
-      const response = await fetch('https://v2.api.noroff.dev/blog/posts/jolyn');
+      const response = await fetch(url);
       const data = await response.json();
-      allPosts = data;
-      filteredPosts = data;
-      populateCarousel(data);
-      populateThumbnails();
-      setupFilterButtons();
-      updatePagination();
+      if (data.data && data.data.length > 0) {
+          allPosts = data.data;
+          filteredPosts = data.data;
+          populateCarousel(data.data);
+          populateThumbnails();
+          setupFilterButtons();
+          updatePagination();
+      } else {
+          console.error('No posts available');
+      }
   } catch (error) {
       console.error('Error fetching posts:', error);
   }
@@ -25,14 +44,25 @@ async function fetchPosts() {
 
 function populateCarousel(posts) {
   const carousel = document.getElementById('carousel');
-  posts.slice(0, 3).forEach(post => {
+  if (carousel) {
+    carousel.innerHTML = ''; // Clear existing content
+    posts.slice(0, 3).forEach(post => {
       const item = document.createElement('div');
+      item.className = 'carousel-item'; // Add class for styling if needed
       item.innerHTML = `
-          <img src="${post.image}" alt="${post.title}">
-          <button onclick="window.location.href='post/index.html?id=${post.id}'">Read More</button>
+        <a href="post/index.html?id=${post.id}">
+          <img src="${post.media.url}" alt="${post.media.alt}">
+          <div class="carousel-content">
+            <div class="carousel-title">${post.title}</div>
+            <button class="read-more-btn">Read More</button>
+          </div>
+        </a>
       `;
       carousel.appendChild(item);
-  });
+    });
+  } else {
+    console.error('Carousel element not found');
+  }
 }
 
 function setupCarousel() {
@@ -41,59 +71,68 @@ function setupCarousel() {
   const nextBtn = document.getElementById('next-btn');
   let index = 0;
 
-  prevBtn.addEventListener('click', () => {
-      index = (index > 0) ? index - 1 : carousel.children.length - 1;
-      updateCarousel();
-  });
-
-  nextBtn.addEventListener('click', () => {
-      index = (index < carousel.children.length - 1) ? index + 1 : 0;
-      updateCarousel();
-  });
-
   function updateCarousel() {
-      const offset = -index * 100;
-      carousel.style.transform = `translateX(${offset}%)`;
+    const offset = -index * 100;
+    carousel.style.transform = `translateX(${offset}%)`;
+  }
+
+  function showNextSlide() {
+    index = (index < carousel.children.length - 1) ? index + 1 : 0;
+    updateCarousel();
+  }
+
+  function showPrevSlide() {
+    index = (index > 0) ? index - 1 : carousel.children.length - 1;
+    updateCarousel();
+  }
+
+  if (carousel && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', showPrevSlide);
+    nextBtn.addEventListener('click', showNextSlide);
+
+    // Automatically move to the next slide every 5 seconds
+    setInterval(showNextSlide, 5000);
+  } else {
+    console.error('Carousel or navigation buttons not found');
   }
 }
+
 
 function setupFilterButtons() {
   const filterButtons = document.querySelectorAll('.filter-btn');
   filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          const category = button.getAttribute('data-category');
-          filterPosts(category);
-      });
+    button.addEventListener('click', async () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      const category = button.getAttribute('data-category');
+      showLoader();
+      await fetchPosts(category === 'all' ? '' : category);
+      hideLoader();
+    });
   });
-}
-
-function filterPosts(category) {
-  if (category === 'all') {
-      filteredPosts = allPosts;
-  } else {
-      filteredPosts = allPosts.filter(post => post.category === category);
-  }
-  currentPage = 1;
-  populateThumbnails();
-  updatePagination();
 }
 
 function populateThumbnails() {
   const thumbnailsContainer = document.getElementById('thumbnails-container');
-  thumbnailsContainer.innerHTML = '';
-  const start = (currentPage - 1) * postsPerPage;
-  const end = start + postsPerPage;
-  const postsToDisplay = filteredPosts.slice(start, end);
-  postsToDisplay.forEach(post => {
+  if (thumbnailsContainer) {
+    thumbnailsContainer.innerHTML = '';
+    const start = (currentPage - 1) * postsPerPage;
+    const end = start + postsPerPage;
+    const postsToDisplay = filteredPosts.slice(start, end);
+    postsToDisplay.forEach(post => {
       const item = document.createElement('div');
+      item.className = 'thumbnail-item'; // Add class for styling if needed
       item.innerHTML = `
-          <img src="${post.image}" alt="${post.title}">
-          <a href="post/index.html?id=${post.id}">${post.title}</a>
+        <a href="post/index.html?id=${post.id}">
+          <img src="${post.media.url}" alt="${post.media.alt}">
+          <div class="thumbnails-title">${post.title}</div>
+        </a>
       `;
       thumbnailsContainer.appendChild(item);
-  });
+    });
+  } else {
+    console.error('Thumbnails container not found');
+  }
 }
 
 function updatePagination() {
@@ -101,24 +140,70 @@ function updatePagination() {
   const prevPageBtn = document.getElementById('prev-page');
   const nextPageBtn = document.getElementById('next-page');
 
-  pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredPosts.length / postsPerPage)}`;
+  if (pageInfo && prevPageBtn && nextPageBtn) {
+    pageInfo.textContent = `Page ${currentPage} of ${Math.ceil(filteredPosts.length / postsPerPage)}`;
 
-  prevPageBtn.disabled = currentPage === 1;
-  nextPageBtn.disabled = currentPage === Math.ceil(filteredPosts.length / postsPerPage);
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === Math.ceil(filteredPosts.length / postsPerPage);
 
-  prevPageBtn.addEventListener('click', () => {
+    prevPageBtn.addEventListener('click', () => {
       if (currentPage > 1) {
-          currentPage--;
-          populateThumbnails();
-          updatePagination();
+        currentPage--;
+        populateThumbnails();
+        updatePagination();
       }
-  });
+    });
 
-  nextPageBtn.addEventListener('click', () => {
+    nextPageBtn.addEventListener('click', () => {
       if (currentPage < Math.ceil(filteredPosts.length / postsPerPage)) {
-          currentPage++;
-          populateThumbnails();
-          updatePagination();
+        currentPage++;
+        populateThumbnails();
+        updatePagination();
       }
-  });
+    });
+  } else {
+    console.error('Pagination elements not found');
+  }
+}
+
+function setupSearch() {
+  const searchIcon = document.getElementById('search-icon');
+  const searchInput = document.getElementById('search-input');
+
+  if (searchIcon && searchInput) {
+    searchIcon.addEventListener('click', () => {
+      searchInput.style.display = 'inline-block';
+      searchInput.focus();
+    });
+
+    searchInput.addEventListener('blur', () => {
+      if (!searchInput.value) {
+        searchInput.style.display = 'none';
+      }
+    });
+
+    searchInput.addEventListener('input', handleSearch);
+  }
+}
+
+function handleSearch(event) {
+  const query = event.target.value.toLowerCase();
+  filteredPosts = allPosts.filter(post => post.title.toLowerCase().includes(query) || post.body.toLowerCase().includes(query));
+  currentPage = 1;
+  populateThumbnails();
+  updatePagination();
+}
+
+function showLoader() {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    loader.style.display = 'block';
+  }
+}
+
+function hideLoader() {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    loader.style.display = 'none';
+  }
 }

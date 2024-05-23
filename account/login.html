@@ -19,17 +19,13 @@
 <body>
     <nav>
         <div class="logo">
-            <a href="index.html">
-                <img src="assets/hotview_logo.png" alt="hotview-logo">
+            <a href="/index.html">
+                <img src="/assets/hotview_logo.png" alt="hotview-logo">
             </a>
         </div>
         <ul>
-            <li><a href="search.html">
-                <span class="material-symbols-outlined">
-                    search
-                </span></a>
-            </li>
-            <li><a href="/post/create.html">Blog</a></li>
+            
+            <li><a href="/index.html">Blog</a></li>
             <li><a href="/account/register.html" class="register-button">Register</a></li>
             <li><a href="/account/login.html" class="login-button">Login</a></li>
                
@@ -43,11 +39,11 @@
         <form id="login-form">
             <div>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" placeholder="Enter your registered @stud.noroff.no email.." required>
             </div>
             <div>
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="Enter your password.." required>
             </div>
             <button type="submit">Login</button>
         </form>
@@ -56,13 +52,13 @@
     <footer>
    
         <div class="footer-list nav-links">
-           <li><a href="index.html" class="logo footer-logo">
+           <li><a href="/index.html" class="logo footer-logo">
                 <img src="/assets/hotview_logo.png" alt="hotview-logo">
             </a></li> 
             <ul class="nav-links">
                 <li><a href="/about.html">About Us</a></li>
                 <li><a href="/contact.html">Contact Us</a></li>
-                <li><a href="search.html">Search</li>
+                <li><a href="/terms.html">Terms and Conditions</li>
             </ul>  
             <ul class="nav-links">
                 <li><a href="/index.html">Blog</a></li>
@@ -85,7 +81,8 @@
     </footer>
     
     <script src="../js/auth.js"></script>
-
+    <script src="../js/main.js"></script>
+    <script src="../js/post.js"></script>
 
 </body>
 </html>
