@@ -1,3 +1,31 @@
+// Event listener for DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('/post/edit.html') || window.location.pathname.includes('/account/login.html')) {
+        checkLogin();
+    }
+
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+            await login(email, password);
+        });
+    }
+
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            const name = event.target.name.value;
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+            await register(name, email, password);
+        });
+    }
+});
+
 // Function to log in the user
 async function login(email, password) {
     try {
@@ -9,25 +37,12 @@ async function login(email, password) {
 
         const data = await response.json();
         if (response.ok) {
-            // Assuming the API returns accessToken and refreshToken
-            const accessToken = data.data.accessToken;
-
-            // Store the tokens in local storage
+            const { accessToken, refreshToken } = data.data;
             localStorage.setItem('accessToken', accessToken);
-
-            // Refresh the access token
-            const newAccessToken = await refreshAccessToken();
-
-            // Store the access token in local storage
-            localStorage.setItem('accessToken', newAccessToken);
-
-            // Show success message
+            localStorage.setItem('refreshToken', refreshToken);
             alert('Login Successful! You can now manage your posts.');
-
-            // Redirect to manage-posts.html
             window.location.href = '/post/edit.html';
         } else {
-            // Handle errors, for example:
             alert('Login failed: ' + (data.errors ? data.errors.map(error => error.message).join(', ') : 'Unknown error'));
         }
     } catch (error) {
@@ -38,8 +53,12 @@ async function login(email, password) {
 
 // Function to refresh the access token
 async function refreshAccessToken() {
+    const refreshToken = localStorage.getItem('refreshToken');
+    if (!refreshToken) {
+        return null;
+    }
+
     try {
-        const refreshToken = localStorage.getItem('refreshToken');
         const response = await fetch('https://v2.api.noroff.dev/auth/refresh', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -48,15 +67,18 @@ async function refreshAccessToken() {
 
         const data = await response.json();
         if (response.ok) {
-            localStorage.setItem('accessToken', data.accessToken);
-            return data.accessToken;
+            const newAccessToken = data.data.accessToken;
+            localStorage.setItem('accessToken', newAccessToken);
+            return newAccessToken;
         } else {
-            throw new Error('Failed to refresh token');
+            console.error('Error refreshing access token:', data.errors);
+            logout();
         }
     } catch (error) {
-        console.error('Error refreshing access token:', error);
+        console.error('Error during token refresh:', error);
         logout();
     }
+    return null;
 }
 
 // Function to get the access token from local storage
@@ -65,8 +87,13 @@ function getAccessToken() {
 }
 
 // Function to check if the user is logged in
-function checkLogin() {
-    const token = getAccessToken();
+async function checkLogin() {
+    let token = getAccessToken();
+    if (!token) {
+        window.location.href = '/account/login.html';
+        return;
+    }
+    token = await refreshAccessToken();
     if (!token) {
         window.location.href = '/account/login.html';
     }
@@ -115,31 +142,3 @@ async function register(name, email, password) {
         alert('Registration failed');
     }
 }
-
-// Event listener for DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('/post/edit.html') || window.location.pathname.includes('/post/index.html')) {
-        checkLogin();
-    }
-
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', async event => {
-            event.preventDefault();
-            const email = event.target.email.value;
-            const password = event.target.password.value;
-            await login(email, password);
-        });
-    }
-
-    const registerForm = document.getElementById('register-form');
-    if (registerForm) {
-        registerForm.addEventListener('submit', async event => {
-            event.preventDefault();
-            const name = event.target.name.value;
-            const email = event.target.email.value;
-            const password = event.target.password.value;
-            await register(name, email, password);
-        });
-    }
-});

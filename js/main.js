@@ -2,7 +2,7 @@ let allPosts = [];
 let filteredPosts = [];
 let currentPage = 1;
 const postsPerPage = 12;
-const userName = 'jolyn';  // Replace with the appropriate user name
+const userName = 'jolyn';
 
 document.addEventListener('DOMContentLoaded', async () => {
   showLoader();
@@ -19,13 +19,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function fetchPosts(tag = '') {
+  const token = localStorage.getItem('accessToken');
   let url = `https://v2.api.noroff.dev/blog/posts/${userName}`;
   if (tag) {
     url += `?_tag=${tag}`;
   }
-  
+
   try {
-      const response = await fetch(url);
+      const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+              'Authorization': `Bearer ${token}`
+          }
+      });
       const data = await response.json();
       if (data.data && data.data.length > 0) {
           allPosts = data.data;
@@ -48,14 +54,14 @@ function populateCarousel(posts) {
     carousel.innerHTML = ''; // Clear existing content
     posts.slice(0, 3).forEach(post => {
       const item = document.createElement('div');
-      item.className = 'carousel-item'; // Add class for styling if needed
+      item.className = 'carousel-item'; 
       item.innerHTML = `
-        <a href="post/index.html?id=${post.id}">
+        <a href="post/index.html?name=${userName}&id=${post.id}">
           <img src="${post.media.url}" alt="${post.media.alt}">
           <div class="carousel-content">
-            <div class="carousel-title">${post.title}</div>
-            <button class="read-more-btn">Read More</button>
-          </div>
+            <div class="carousel-title">${post.title}</div> 
+          </div> 
+          <button class="read-more-btn">Read More</button> 
         </a>
       `;
       carousel.appendChild(item);
@@ -69,34 +75,35 @@ function setupCarousel() {
   const carousel = document.getElementById('carousel');
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
+
+  if (!carousel || !prevBtn || !nextBtn) {
+      console.error('Carousel or navigation buttons not found');
+      return; // Exit the function if elements are not found
+  }
+
   let index = 0;
 
   function updateCarousel() {
-    const offset = -index * 100;
-    carousel.style.transform = `translateX(${offset}%)`;
+      const offset = -index * 100;
+      carousel.style.transform = `translateX(${offset}%)`;
   }
 
   function showNextSlide() {
-    index = (index < carousel.children.length - 1) ? index + 1 : 0;
-    updateCarousel();
+      index = (index < carousel.children.length - 1) ? index + 1 : 0;
+      updateCarousel();
   }
 
   function showPrevSlide() {
-    index = (index > 0) ? index - 1 : carousel.children.length - 1;
-    updateCarousel();
+      index = (index > 0) ? index - 1 : carousel.children.length - 1;
+      updateCarousel();
   }
 
-  if (carousel && prevBtn && nextBtn) {
-    prevBtn.addEventListener('click', showPrevSlide);
-    nextBtn.addEventListener('click', showNextSlide);
+  prevBtn.addEventListener('click', showPrevSlide);
+  nextBtn.addEventListener('click', showNextSlide);
 
-    // Automatically move to the next slide every 5 seconds
-    setInterval(showNextSlide, 5000);
-  } else {
-    console.error('Carousel or navigation buttons not found');
-  }
+  // Automatically move to the next slide every 5 seconds
+  setInterval(showNextSlide, 5000);
 }
-
 
 function setupFilterButtons() {
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -115,23 +122,28 @@ function setupFilterButtons() {
 function populateThumbnails() {
   const thumbnailsContainer = document.getElementById('thumbnails-container');
   if (thumbnailsContainer) {
-    thumbnailsContainer.innerHTML = '';
-    const start = (currentPage - 1) * postsPerPage;
-    const end = start + postsPerPage;
-    const postsToDisplay = filteredPosts.slice(start, end);
-    postsToDisplay.forEach(post => {
-      const item = document.createElement('div');
-      item.className = 'thumbnail-item'; // Add class for styling if needed
-      item.innerHTML = `
-        <a href="post/index.html?id=${post.id}">
-          <img src="${post.media.url}" alt="${post.media.alt}">
-          <div class="thumbnails-title">${post.title}</div>
-        </a>
-      `;
-      thumbnailsContainer.appendChild(item);
-    });
+      thumbnailsContainer.innerHTML = '';
+      const start = (currentPage - 1) * postsPerPage;
+      const end = start + postsPerPage;
+      const postsToDisplay = filteredPosts.slice(start, end);
+      postsToDisplay.forEach(post => {
+          const item = document.createElement('div');
+          item.className = 'thumbnail-item'; 
+          item.innerHTML = `
+              <img src="${post.media.url}" alt="${post.media.alt}" onclick="window.location.href='post/index.html?name=${userName}&id=${post.id}'">
+              <div class="thumbnail-content">
+                  <h3 class="thumbnail-title">${post.title}</h3>
+                  <div class="thumbnail-text">
+                  <p class="thumbnail-author">Author: ${post.author.name}</p>
+                  <p class="thumbnail-date">Date: ${new Date(post.created).toLocaleDateString()}</p>
+                  </div>
+                  <button class="read-more-btn" onclick="window.location.href='post/index.html?name=${userName}&id=${post.id}'">Read More</button>
+              </div>
+          `;
+          thumbnailsContainer.appendChild(item);
+      });
   } else {
-    console.error('Thumbnails container not found');
+      console.error('Thumbnails container not found');
   }
 }
 
@@ -198,6 +210,8 @@ function showLoader() {
   const loader = document.getElementById('loader');
   if (loader) {
     loader.style.display = 'block';
+  } else {
+    console.error('Loader element not found.');
   }
 }
 
@@ -205,5 +219,7 @@ function hideLoader() {
   const loader = document.getElementById('loader');
   if (loader) {
     loader.style.display = 'none';
+  } else {
+    console.error('Loader element not found.');
   }
 }
