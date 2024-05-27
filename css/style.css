@@ -1,13 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url(/assets/hotview_bg.jpeg);
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
+  background-color: #141313;
   box-sizing: border-box;
   font-family: 'Montserrat', 'Just Another Hand', Arial, sans-serif;
-  color: #363732;
+  color: #ffffff;
 }
 
 /* Loader Style */
