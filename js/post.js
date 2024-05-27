@@ -58,8 +58,8 @@ async function fetchPostById(name, id) {
             throw new Error('Post not found');
         }
         const data = await response.json();
-        console.log('API Response:', data); // Add this line to log the response
-        const post = data.data; // Ensure this matches the API response structure
+
+        const post = data.data; 
         if (post) {
             populatePostContent(post);
             populateEditForm(post);
@@ -136,7 +136,7 @@ async function handleSubmitPostForm(event) {
 async function createPost(post, name) {
     try {
         const token = localStorage.getItem('accessToken');
-        console.log('Token:', token);
+        alert('Token:', token);
         const response = await fetch(`https://v2.api.noroff.dev/blog/posts/${name}`, {
             method: 'POST',
             headers: {
@@ -149,7 +149,7 @@ async function createPost(post, name) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Post created:', data);
+        alert('Post created:', data);
     } catch (error) {
         console.error('Error creating post:', error);
     }
@@ -170,7 +170,7 @@ async function editPostRequest(name, id, post) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Post edited:', data);
+        alert('Post edited:', data);
         window.location.href = `/index.html`;
     } catch (error) {
         console.error('Error editing post:', error);
