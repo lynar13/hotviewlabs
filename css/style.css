@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('/FED1-PE1-lynar13/assets/hotview_bg.jpeg');
+  background-image: url('../assets/hotview_bg.jpeg');
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 

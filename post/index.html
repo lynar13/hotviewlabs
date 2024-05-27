@@ -17,8 +17,8 @@
    
     <nav>
         <div class="logo">
-            <a href="/index.html">
-                <img src="/assets/hotview_logo.png" alt="hotview-logo">
+            <a href="../index.html">
+                <img src="../assets/hotview_logo.png" alt="hotview-logo">
             </a>
         </div>
         <ul>
@@ -26,66 +26,57 @@
                 <span class="material-symbols-outlined" id="search-icon">search</span>
                 <input type="text" id="search-input" placeholder="Search posts by category..." style="display: none;" oninput="handleSearch(event)">
             </li>
-            <li><a href="/account/register.html">Register</a></li>
-            <li><a href="/account/login.html">Login</a></li>
-               
+            <li><a href="../account/register.html">Register</a></li>
+            <li><a href="../account/login.html">Login</a></li>
         </ul>
     </nav>
-
-   
 
     <header>
         <h1 id="post-title"></h1>
     </header>
     <main>
-        
         <article id="post-page-container">
-            
             <div id="post-list"></div>
             <p id="post-author"></p>
             <p id="post-created"></p>
             <p id="post-updated"></p>
             <img id="post-image" src="" alt="">
             <div id="post-content"></div>
-            
         </article>
         <div id="post-actions" style="display: none;">
             <button id="edit-button">Edit</button>
             <button id="delete-button">Delete</button>
         </div>
-
     </main>
 
     <!-- Back to Top and Scroll Down Buttons -->
     <button id="back-to-top" class="scroll-btn">
-        <span class="material-symbols-outlined">
-            keyboard_arrow_up
-            </span>Top</button>
-     <button id="scroll-down" class="scroll-btn">Down</button>
+        <span class="material-symbols-outlined">keyboard_arrow_up</span>Top</button>
+    <button id="scroll-down" class="scroll-btn">Down</button>
        
-     <footer>
+    <footer>
         <div class="footer-list">
             <ul class="nav-links">
-                <li><a href="/index.html" class="logo footer-logo">
-                    <img src="/assets/hotview_logo.png" alt="hotview-logo">
+                <li><a href="../index.html" class="logo footer-logo">
+                    <img src="../assets/hotview_logo.png" alt="hotview-logo">
                 </a></li>
             </ul>
             <ul class="nav-links">
-                <li><a href="/about.html">About Us</a></li>
-                <li><a href="/contact.html">Contact Us</a></li>
-                <li><a href="/terms.html">Terms and Conditions</a></li>
+                <li><a href="../about.html">About Us</a></li>
+                <li><a href="../contact.html">Contact Us</a></li>
+                <li><a href="../terms.html">Terms and Conditions</a></li>
             </ul>
             <ul class="nav-links">
-                <li><a href="/index.html">Blog Feed</a></li>
-                <li><a href="/account/register.html">Register</a></li>
-                <li><a href="/account/login.html">Login</a></li>
+                <li><a href="../index.html">Blog Feed</a></li>
+                <li><a href="../account/register.html">Register</a></li>
+                <li><a href="../account/login.html">Login</a></li>
             </ul>
             <ul class="social-icons">
-                <li><a href="/index.html" class="button-link">BLOG</a></li>
+                <li><a href="../index.html" class="button-link">BLOG</a></li>
                 <li><p>FOLLOW US</p></li>
                 <li class="soc-med">
-                    <img src="/assets/facebook-svgrepo-com.svg" alt="facebook">
-                    <img src="/assets/instagram-svgrepo-com.svg" alt="instagram">
+                    <img src="../assets/facebook-svgrepo-com.svg" alt="facebook">
+                    <img src="../assets/instagram-svgrepo-com.svg" alt="instagram">
                 </li>
             </ul>
         </div>
@@ -94,9 +85,7 @@
         </div>
     </footer>
 
-   
     <script src="../js/post.js"></script>
-    
 
     <script>
         // JavaScript for Back to Top and Scroll Down buttons
@@ -118,6 +107,5 @@
             }
         });
     </script>
-    
 </body>
 </html>
