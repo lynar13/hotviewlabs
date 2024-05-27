@@ -1,14 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
   background-color: #171716;
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
   box-sizing: border-box;
   font-family: 'Montserrat', 'Just Another Hand', Arial, sans-serif;
-  color: #ffffff;
 }
 
 /* Loader Style */
