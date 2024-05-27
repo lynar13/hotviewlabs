@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const postId = params.get('id');
     const postName = params.get('name');
     
-    
     // Try fetching the post
     try {
         if (postId && postName) {
@@ -62,6 +61,8 @@ function populatePostContent(post) {
     const updatedElement = document.getElementById('post-updated');
     const imageElement = document.getElementById('post-image');
     const contentElement = document.getElementById('post-content');
+    const editButton = document.getElementById('edit-button');
+    const deleteButton = document.getElementById('delete-button');
 
     if (titleElement) titleElement.textContent = post.title;
     if (authorElement) authorElement.textContent = `Author: ${post.author.name}`;
@@ -74,8 +75,27 @@ function populatePostContent(post) {
     if (contentElement) {
         contentElement.innerHTML = post.body;
     }
+
+    // Show edit and delete buttons if the user is logged in
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        if (editButton) editButton.style.display = 'block';
+        if (deleteButton) deleteButton.style.display = 'block';
+    } else {
+        if (editButton) editButton.style.display = 'none';
+        if (deleteButton) deleteButton.style.display = 'none';
+    }
 }
 
+// Define the showCreatePostForm function
+function showCreatePostForm() {
+    document.getElementById('post-id').value = '';
+    document.getElementById('post-form').reset();
+    document.getElementById('submit-post-btn').textContent = 'Create Post';
+    document.getElementById('post-form-section').style.display = 'block';
+}
+
+// Redirect to the edit form
 function editPost(id) {
     const token = localStorage.getItem('accessToken');
     if (!token) {
@@ -110,7 +130,6 @@ async function deletePost(name, id) {
         alert('Error deleting post: ' + error.message);
     }
 }
-
 
 function setupSearch() {
     const searchIcon = document.getElementById('search-icon');

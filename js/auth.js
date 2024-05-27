@@ -1,8 +1,6 @@
 // Event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('/post/edit.html') || window.location.pathname.includes('/account/login.html')) {
-        checkLogin();
-    }
+   
 
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
