@@ -1,12 +1,13 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #171716;
+  background-image: url(/assets/hotview_bg.jpeg);
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
   box-sizing: border-box;
   font-family: 'Montserrat', 'Just Another Hand', Arial, sans-serif;
+  color: #363732;
 }
 
 /* Loader Style */
@@ -47,7 +48,7 @@ h2 {
   color: #ffffff;
 }
 
-header {
+header, p {
   color: #ffffff;
   padding: 1rem;
   text-align: center;
@@ -975,7 +976,9 @@ main {
   color: #333;
   margin-top: 0;
 }
-
+.offering p {
+  color: #363732;
+}
 ul {
   padding-left: 1.5rem;
 }
