@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url('/assets/hotview_bg.jpeg'); 
+  background-color: #171716;
   background-size: cover; 
   background-position: center; 
   background-repeat: no-repeat; 
@@ -56,7 +56,7 @@ header {
 }
 
 .heading {
-  color: #363732;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -496,7 +496,7 @@ button:hover {
 }
 
 #pagination span {
-  color: #363732;
+  color: #ffffff;
 }
 
 #pagination button {
@@ -650,7 +650,13 @@ button:hover {
   border-radius: 8px;
   margin-bottom: 20px;
 }
-
+#post-actions {
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto;
+  padding: 30px;
+  
+}
 
 /* Login and Register Form container */
 
