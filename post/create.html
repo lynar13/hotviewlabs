@@ -31,27 +31,32 @@
     </nav>
 
     <header>
-        <h1>Edit Blog Post</h1>
+        <h1>Create Blog Post</h1>
     </header>
     <main>
        
-        <div id="post-form-section">
+        <button id="create-post-btn">Create Post</button>
+        <div id="post-form-section" style="display:none;">
             <form id="post-form">
                 <input type="hidden" id="post-id">
                 <label for="post-title-input">Title:</label>
-                <input type="text" id="post-title-input" required>
+                <input type="text" id="post-title-input">
                 <label for="post-content-input">Content:</label>
-                <textarea id="post-content-input" required></textarea>
+                <textarea id="post-content-input"></textarea>
                 <label for="post-tags-input">Tags:</label>
-                <input type="text" id="post-tags-input" required>
+                <input type="text" id="post-tags-input">
                 <label for="post-image-input">Image URL:</label>
-                <input type="text" id="post-image-input" required>
+                <input type="text" id="post-image-input">
                 <label for="post-image-alt-input">Image Alt Text:</label>
-                <input type="text" id="post-image-alt-input" required>
-                <button type="submit" id="submit-post-btn">Edit Post</button>
-                <button type="button" id="delete-post-btn">Delete Post</button>
+                <input type="text" id="post-image-alt-input">
+                <button type="submit" id="submit-post-btn">Create Post</button>
             </form>
         </div>
+        
+        <section id="post-list">
+            <!-- List of posts with edit and delete buttons will be populated by JavaScript -->
+        </section>
+
         
     </main>
 

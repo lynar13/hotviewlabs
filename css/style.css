@@ -207,7 +207,7 @@ nav ul li a {
 }
 
 .carousel-item .read-more-btn:hover {
-  background-color: #363732;
+  background-color: black;
 }
 
 #prev-btn {
@@ -373,7 +373,7 @@ button {
 }
 
 button:hover {
-  background-color: #363732;
+  background-color: black;
 }
 
 /* Filter and Thumbnails */
@@ -459,7 +459,7 @@ button:hover {
 }
 
 .thumbnails-title:hover {
-  background-color: #363732;
+  background-color: black;
   color: #ff80ce;
 }
 
@@ -509,7 +509,7 @@ button:hover {
 }
 
 #pagination button:hover {
-  background-color: #363732;
+  background-color: black;
   color: #ffffff;
 }
 /* Form container styles */
@@ -553,11 +553,11 @@ button:hover {
 
 /* Form button styles */
 #post-form button[type="submit"],
-#create-post-btn {
+#create-post-btn, #delete-post-btn {
   background-color: #ff80ce;
   color: white;
   padding: 10px 20px;
-  margin: 10px 0;
+  margin: 10px 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -566,7 +566,7 @@ button:hover {
 
 #post-form button[type="submit"]:hover,
 #create-post-btn:hover {
-  background-color: #363732;
+  background-color: black;
 }
 
 /* Post list item styles */
@@ -605,7 +605,7 @@ button:hover {
 }
 
 .post-item button:hover {
-  background-color: #e53935;
+  background-color: black;
 }
 
 /* Post Page Styles */
@@ -650,6 +650,7 @@ button:hover {
   border-radius: 8px;
   margin-bottom: 20px;
 }
+
 
 /* Login and Register Form container */
 
@@ -703,7 +704,7 @@ button:hover {
 }
 
 .form-container button[type="submit"]:hover {
-  background-color: #e768a9;
+  background-color: black;
 }
 .form-group input[type="text"],
 .form-group input[type="email"],
@@ -873,7 +874,7 @@ footer {
 }
 
 .social-icons .button-link:hover {
-  background-color: #363732;
+  background-color: black;
 }
 
 .social-icons p {
@@ -1038,7 +1039,7 @@ ul li {
 }
 
 .scroll-btn:hover {
-  background-color: #ff80ce;
+  background-color: black;
 }
 
 @media (max-width: 768px) {

@@ -39,7 +39,7 @@ async function login(email, password) {
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
             alert('Login Successful! You can now manage your posts.');
-            window.location.href = '/post/edit.html';
+            window.location.href = '/post/create.html';
         } else {
             alert('Login failed: ' + (data.errors ? data.errors.map(error => error.message).join(', ') : 'Unknown error'));
         }
