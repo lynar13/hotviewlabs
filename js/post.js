@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             postActions.style.display = 'block';
 
             document.getElementById('edit-button').addEventListener('click', () => {
-                window.location.href = `/post/edit.html?id=${postId}&name=${postName}`;
+                window.location.href = `../post/edit.html?id=${postId}&name=${postName}`;
             });
 
             document.getElementById('delete-button').addEventListener('click', async () => {
@@ -192,7 +192,7 @@ function editPost(id) {
         alert('You need to log in to edit posts');
         return;
     }
-    window.location.href = `post/edit.html?id=${id}&token=${token}`;
+    window.location.href = `..post/edit.html?id=${id}&token=${token}`;
 }
 
 // Delete a post
