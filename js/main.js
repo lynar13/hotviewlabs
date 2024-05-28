@@ -130,14 +130,14 @@ function populateThumbnails() {
           const item = document.createElement('div');
           item.className = 'thumbnail-item'; 
           item.innerHTML = `
-              <img src="${post.media.url}" alt="${post.media.alt}" onclick="window.location.href='post/index.html?name=${userName}&id=${post.id}'">
+              <img src="${post.media.url}" alt="${post.media.alt}" onclick="window.location.href='/post/index.html?name=${userName}&id=${post.id}'">
               <div class="thumbnail-content">
                   <h3 class="thumbnail-title">${post.title}</h3>
                   <div class="thumbnail-text">
                   <p class="thumbnail-author">Author: ${post.author.name}</p>
                   <p class="thumbnail-date">Date: ${new Date(post.created).toLocaleDateString()}</p>
                   </div>
-                  <button class="read-more-btn" onclick="window.location.href='post/index.html?name=${userName}&id=${post.id}'">Read More</button>
+                  <button class="read-more-btn" onclick="window.location.href='/post/index.html?name=${userName}&id=${post.id}'">Read More</button>
               </div>
           `;
           thumbnailsContainer.appendChild(item);
