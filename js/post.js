@@ -171,7 +171,7 @@ async function editPostRequest(name, id, post) {
         }
         const data = await response.json();
         alert('Post edited:', data);
-        window.location.href = `/index.html`;
+        window.location.href = `index.html`;
     } catch (error) {
         console.error('Error editing post:', error);
     }
@@ -214,7 +214,7 @@ async function deletePost(name, id) {
             throw new Error('Failed to delete post');
         }
         alert('Post deleted successfully');
-        window.location.href = '/index.html'; // Redirect to the main page after deletion
+        window.location.href = 'index.html'; // Redirect to the main page after deletion
     } catch (error) {
         console.error('Error deleting post:', error);
         alert('Error deleting post: ' + error.message);
