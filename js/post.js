@@ -171,7 +171,7 @@ async function editPostRequest(name, id, post) {
         }
         const data = await response.json();
         alert('Post edited:', data);
-        window.location.href = `index.html`;
+        window.location.href = `../post/index.html?id=${postId}&name=${postName}`;
     } catch (error) {
         console.error('Error editing post:', error);
     }
