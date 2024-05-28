@@ -81,6 +81,7 @@ function populatePostContent(post) {
     const contentElement = document.getElementById('post-content');
     const editButton = document.getElementById('edit-button');
     const deleteButton = document.getElementById('delete-button');
+    const createPostBtn = document.getElementById('create-post-btn');
 
     if (titleElement) titleElement.textContent = post.title;
     if (authorElement) authorElement.textContent = `Author: ${post.author.name}`;
