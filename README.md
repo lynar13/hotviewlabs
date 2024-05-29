@@ -2,11 +2,11 @@
 
 ![image](https://github.com/lynar13/image-hosting/blob/main/Project%20Exam%201.png?raw=true)
 
-Blogging Application
+Project Exam 1 Blogging Application
 
 ## Description
 
-A responsive blogging application that allow users to view dynamic blog posts.
+Welcome to the Project Exam Blogging App! This project is a comprehensive blogging platform where users can create, edit, and delete posts, as well as view posts by other users. This README provides information on how to set up the project, contribute to it, and the technologies used.
 
 - Users can register and login to their accounts and get an access to manage blog posts.
 
@@ -18,40 +18,16 @@ A responsive blogging application that allow users to view dynamic blog posts.
 
 HTML, CSS and JavaScript.
 
-## Getting Started 
-
-### Installing
-
-1. Clone the repo:
-
-```bash
-git clone git@github.com:https://github.com/NoroffFEU/FED1-PE1-lynar13
-```
-
-2. Install the dependencies:
-
-```
-npm install
-```
-
-### Running
-
-Here is where you detail how to run the app. It typically involves the commands you'd need to run to start the project e.g.
-
-To run the app, run the following commands:
-
-```bash
-npm run start
-```
 
 ## Contributing
 
-Here you can detail any information you want to provide regarding contributing to the project. For big projects you will usually have a separate `CONTRIBUTING.md` and link to it, but for smaller projects you can simply include instructions here. These instructions can simply detail the process you want a person to take, such as to make sure to open a pull request so code can be reviewed.
+We welcome contributions to the Project Exam Blogging App! By contributing, you help improve the project for everyone. Here's how you can get started:
 
-## Contact
+### How to Contribute
 
-This is where you can leave your social links for people to contact you, such as a LinkedIn profile or Twitter link e.g.
+1. **Fork the Repository**: Start by forking the repository to your GitHub account. This creates a personal copy of the project where you can make your changes.
 
-[My Twitter page](www.twitter.com)
-
-[My LinkedIn page](www.linkedin.com)
+2. **Clone the Repository**: Clone the forked repository to your local machine using the following command:
+   ```bash
+   git clone https://github.com/FED1-PE1-lynar13
+.git
